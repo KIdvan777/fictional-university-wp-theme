@@ -12,13 +12,24 @@ add_action('wp_enqueue_scripts', 'university_files');
 // Theme support
 function university_features(){	
 	add_theme_support('title-tag');
+  add_theme_support('post-thumbnails');
+  add_image_size('professorLandscape', 400 , 260 , true);
+  add_image_size('professorPortrait', 480 , 650 , true);
 }
 add_action('after_setup_theme', 'university_features');
 
+// Native query
 function university_adjust_queries($query){
-	$today = date('Ymd');
+	
+  if(!is_admin() AND is_post_type_archive('program') AND $query->is_main_query()){
+    $query->set('orderby','title');
+    $query->set('order','ASC');
+    $query->set('post_per_page', -1);
+  }
+
 	if(!is_admin() AND is_post_type_archive('event') AND $query->is_main_query()){
-		$query->set('meta_key','event_date');
+		$today = date('Ymd');
+    $query->set('meta_key','event_date');
 		$query->set('orderby','meta_value_num');
 		$query->set('order','ASC');
 		$query->set('meta_query', array(
