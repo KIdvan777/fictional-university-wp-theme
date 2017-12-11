@@ -3,7 +3,7 @@
 // pageBanner reusable function
 
 function pageBanner($args = NULL) {
-  
+
   if (!$args['title']) {
     $args['title'] = get_the_title();
   }
@@ -29,7 +29,7 @@ function pageBanner($args = NULL) {
       <div class="page-banner__intro">
         <p><?php echo $args['subtitle']; ?></p>
       </div>
-    </div>  
+    </div>
   </div>
 
 <?}
@@ -45,7 +45,7 @@ function university_files() {
 add_action('wp_enqueue_scripts', 'university_files');
 
 // Theme support
-function university_features(){	
+function university_features(){
 	add_theme_support('title-tag');
   add_theme_support('post-thumbnails');
   add_image_size('professorLandscape', 400 , 260 , true);
@@ -56,7 +56,7 @@ add_action('after_setup_theme', 'university_features');
 
 // Native query
 function university_adjust_queries($query){
-	
+
   if(!is_admin() AND is_post_type_archive('campus') AND $query->is_main_query()){
     $query->set('post_per_page', -1);
   }
@@ -80,7 +80,7 @@ function university_adjust_queries($query){
                 'type'=>'numeric'
               )));
 	}
-	
+
 }
 add_action('pre_get_posts', 'university_adjust_queries');
 
