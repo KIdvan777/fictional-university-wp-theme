@@ -137,4 +137,11 @@ add_action('login_enqueue_scripts', 'our_login_css');
 
 function our_login_css(){
   wp_enqueue_style('university_main_styles', get_stylesheet_uri(),NULL , microtime());
+  wp_enqueue_script('google-map','//maps.googleapis.com/maps/api/js?key=AIzaSyD4l0ShXMUovtepUXlLdjSvmRTU3O3iyHU', NULL, '1.0', true);
+}
+
+add_filter('login_headertitle', 'ourLoginTitle');
+
+function ourLoginTitle(){
+  return get_bloginfo('name');
 }
