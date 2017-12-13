@@ -103,3 +103,38 @@ function universityMapKey($api){
 }
 
 add_filter('acf/fields/google_map/api', 'universityMapKey');
+
+// Redirect subscriber accounts out of admin and onto homepage
+add_action('admin_init', 'redirectSubsToFrontEnd');
+
+function redirectSubsToFrontEnd(){
+  $ourCurrentUser = wp_get_current_user();
+  if(count($ourCurrentUser->roles)==1 AND $ourCurrentUser->roles[0] == 'subscriber'){
+    wp_redirect(site_url('/'));
+    exit;
+  }
+}
+
+add_action('wp_loaded', 'noSubsAdminBar');
+
+function noSubsAdminBar(){
+  $ourCurrentUser = wp_get_current_user();
+  if(count($ourCurrentUser->roles)==1 AND $ourCurrentUser->roles[0] == 'subscriber'){
+    show_admin_bar(false);
+    
+  }
+}
+
+// Customize Login Screen
+
+add_filter('login_headerurl', 'our_header_url');
+
+function our_header_url(){
+  return esc_url(site_url('/'));
+}
+
+add_action('login_enqueue_scripts', 'our_login_css');
+
+function our_login_css(){
+  wp_enqueue_style('university_main_styles', get_stylesheet_uri(),NULL , microtime());
+}
