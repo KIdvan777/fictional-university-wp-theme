@@ -2,17 +2,17 @@ import $ from 'jquery';
 
 class MyNotes {
   constructor(){
-    this.deleteBtn = $(".delete-note");
-    this.editBtn = $(".edit-note");
-    this.saveBtn = $(".update-note");
+    this.deleteBtn = $("#my-notes");
+    this.editBtn = $("#my-notes");
+    this.saveBtn = $("#my-notes");
     this.submitBtn = $(".submit-note");
     this.events();
   }
 
   events(){
-    this.deleteBtn.on('click', this.deleteNote);
-    this.editBtn.on('click', this.editNote.bind(this));
-    this.saveBtn.on('click', this.updateNote.bind(this));
+    this.deleteBtn.on('click','.delete-note', this.deleteNote);
+    this.editBtn.on('click','.edit-note', this.editNote.bind(this));
+    this.saveBtn.on('click','.update-note', this.updateNote.bind(this));
     this.submitBtn.on('click', this.createNote.bind(this));
 
   }

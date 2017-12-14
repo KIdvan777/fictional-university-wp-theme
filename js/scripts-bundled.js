@@ -10559,9 +10559,9 @@ var MyNotes = function () {
   function MyNotes() {
     _classCallCheck(this, MyNotes);
 
-    this.deleteBtn = (0, _jquery2.default)(".delete-note");
-    this.editBtn = (0, _jquery2.default)(".edit-note");
-    this.saveBtn = (0, _jquery2.default)(".update-note");
+    this.deleteBtn = (0, _jquery2.default)("#my-notes");
+    this.editBtn = (0, _jquery2.default)("#my-notes");
+    this.saveBtn = (0, _jquery2.default)("#my-notes");
     this.submitBtn = (0, _jquery2.default)(".submit-note");
     this.events();
   }
@@ -10569,9 +10569,9 @@ var MyNotes = function () {
   _createClass(MyNotes, [{
     key: "events",
     value: function events() {
-      this.deleteBtn.on('click', this.deleteNote);
-      this.editBtn.on('click', this.editNote.bind(this));
-      this.saveBtn.on('click', this.updateNote.bind(this));
+      this.deleteBtn.on('click', '.delete-note', this.deleteNote);
+      this.editBtn.on('click', '.edit-note', this.editNote.bind(this));
+      this.saveBtn.on('click', '.update-note', this.updateNote.bind(this));
       this.submitBtn.on('click', this.createNote.bind(this));
     }
 
